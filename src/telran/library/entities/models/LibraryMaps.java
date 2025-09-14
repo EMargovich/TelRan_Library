@@ -60,6 +60,7 @@ public class LibraryMaps extends AbstractLibrary implements Persistable {
         return books.get(isbn);
     }
 
+    //Stream 2
     @Override
     public BooksReturnCode pickBook(long isbn, int readerId, LocalDate pickDate) {
         if (!books.containsKey(isbn))
