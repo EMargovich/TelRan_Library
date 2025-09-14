@@ -16,11 +16,11 @@ import java.util.*;
 
 public class LibraryMaps extends AbstractLibrary implements Persistable {
 
-    Map<Long, Book> books = new HashMap<>();
-    Map<Integer, Reader> readers = new HashMap<>();
-    Map<Integer, List<PickRecord>> readersRecords = new HashMap<>();
-    Map<Long, List<PickRecord>> booksRecords = new HashMap<>();
-    Map<LocalDate, List<PickRecord>> records = new TreeMap<>();
+    private Map<Long, Book> books = new HashMap<>();
+    private Map<Integer, Reader> readers = new HashMap<>();
+    private Map<Integer, List<PickRecord>> readersRecords = new HashMap<>();
+    private Map<Long, List<PickRecord>> booksRecords = new HashMap<>();
+    private Map<LocalDate, List<PickRecord>> records = new TreeMap<>();
 
     @Override
     public BooksReturnCode addBookItem(Book book) {
@@ -130,8 +130,12 @@ public class LibraryMaps extends AbstractLibrary implements Persistable {
 
     @Override
     public List<Book> getBooksAuthor(String authorName) {
+        // Возвращает все книги автора, которые зарегистрированы в библиотеке.
+        // Если требуется найти только книги автора, которые есть в наличии,
+        // то нужно раскомментировать второй фильтр
         return books.values().stream()
-                .filter(e -> e.getAuthor().equals(authorName))
+                .filter(b -> b.getAuthor().equals(authorName))
+                //.filter(b -> b.getAmountInUse() < b.getAmount())
                 .toList();
     }
 
