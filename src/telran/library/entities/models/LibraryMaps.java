@@ -122,7 +122,7 @@ public class LibraryMaps extends AbstractLibrary implements Persistable {
 
         List<PickRecord> listRecords = booksRecords.getOrDefault(isbn, new ArrayList<>());
 
-        return booksRecords.get(isbn).stream()
+        return listRecords.stream()
                 .map(r -> readers.get(r.getReaderId()))
                 .distinct()
                 .toList();
@@ -144,7 +144,8 @@ public class LibraryMaps extends AbstractLibrary implements Persistable {
         Collection<List<PickRecord>> res =
             ((TreeMap<LocalDate, List<PickRecord>>) records).subMap(from, to).values();
         return res.stream()
-                .flatMap(l -> l.stream()).toList();
+                .flatMap(l -> l.stream())
+                .toList();
     }
 
     @Override
