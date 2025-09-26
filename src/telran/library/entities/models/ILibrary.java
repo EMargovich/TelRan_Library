@@ -1,8 +1,6 @@
 package telran.library.entities.models;
 
-import telran.library.entities.Book;
-import telran.library.entities.PickRecord;
-import telran.library.entities.Reader;
+import telran.library.entities.*;
 import telran.library.entities.enums.BooksReturnCode;
 
 import java.io.Serializable;
@@ -24,4 +22,15 @@ public interface ILibrary extends Serializable {
     List<Book> getBooksAuthor(String authorName);
     List<PickRecord> getPickedRecordsAtDates(LocalDate from, LocalDate to);
 
+    //Sprint 3
+    RemovedBookData removeBook(long isbn);
+    List<RemovedBookData> removeAuthor(String author);
+    RemovedBookData returnBook(long isbn, int readerId, LocalDate returnDate);
+
+    //Sprint 4
+    List<ReaderDelay> getReadersDelayingBooks(LocalDate currentDate);
+    List<ReaderDelay> getReadersDelayedBooks();
+    List<Book>        getMostPopularBooks(LocalDate fromDate, LocalDate toDate, int fromAge, int toAge);
+    List<String>      getMostPopularAuthors();
+    List<Reader>      getMostActiveReaders(LocalDate fromDate, LocalDate toDate);
 }

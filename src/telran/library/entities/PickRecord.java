@@ -1,9 +1,10 @@
 package telran.library.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class PickRecord {
+public class PickRecord implements Serializable {
     private long isbn;
     private int readerId;
     private LocalDate pickDate;
@@ -51,12 +52,12 @@ public class PickRecord {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PickRecord that = (PickRecord) o;
-        return isbn == that.isbn && readerId == that.readerId && delayDays == that.delayDays && Objects.equals(pickDate, that.pickDate) && Objects.equals(returnDate, that.returnDate);
+        return isbn == that.isbn && readerId == that.readerId && delayDays == that.delayDays;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isbn, readerId, pickDate, returnDate, delayDays);
+        return Objects.hash(isbn, readerId, pickDate);
     }
 
     @Override
